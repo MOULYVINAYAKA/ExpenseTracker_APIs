@@ -3,8 +3,10 @@ const bodyParser = require('body-parser')
 const {ObjectId} = require('mongodb')
 // Importing the required functions from dbConnection.cjs
 const {connectToDb, getDb} = require('./dbConnection.cjs')
+const cors = require('cors')
 //creating instance for express
 const app = express()
+app.use(cors())
 app.use(bodyParser.json())
 
 
@@ -32,7 +34,7 @@ connectToDb(function(error) {
         const port = process.env.port || 8000  //when run render process.env.port when run local system 8000 taken
         app.listen(port)
         db = getDb()
-        console.log('Listening on port 8000...')
+        console.log(`Listening on port {port}...`)
     }
 })
  //before running app.listen() we make sure db connectivity is established other wise not found of db
